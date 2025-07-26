@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/authMiddleware');
-// const upload = require('../middleware/uploadMiddleware');
 const upload = require('../config/cloudinary');
 
 const {
@@ -22,7 +21,5 @@ router.get('/:id', getProductById);
 
 // Delete product (Supplier only)
 router.delete('/:id', auth, deleteProduct);
-
-router.post('/', auth, upload.array('images', 3), addProduct);
 
 module.exports = router;
