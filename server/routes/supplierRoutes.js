@@ -9,7 +9,7 @@ router.post(
   '/verify',
   auth,
   upload.fields([{ name: 'gstin', maxCount: 1 }, { name: 'fssai', maxCount: 1 }]),
-  uploadVerification
+  uploadVerificationDocs // This is correct
 );
 
 module.exports = router;
