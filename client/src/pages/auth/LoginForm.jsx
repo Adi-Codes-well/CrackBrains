@@ -16,11 +16,13 @@ const LoginForm = () => {
     setLoading(true);
     setError('');
     try {
-      // Use relative URL to leverage Vite proxy
+      // FIX: Use a relative URL path starting with /api.
+      // Vite will correctly proxy this request to http://localhost:5000/api/auth/login
       const res = await axios.post('/api/auth/login', { email, password });
       
       localStorage.setItem('token', res.data.token);
 
+      // Decode token to get user role
       const payload = JSON.parse(atob(res.data.token.split('.')[1]));
 
       if (payload.role === 'supplier') {
@@ -48,9 +50,26 @@ const LoginForm = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><p>{error}</p></div>}
             
-            {/* Form fields... (no changes needed here) */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><Mail className="h-5 w-5 text-gray-400" /></div>
+                <input id="email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Enter your email" />
+              </div>
+            </div>
 
-            <button type="submit" disabled={loading} className="w-full ...">
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><Lock className="h-5 w-5 text-gray-400" /></div>
+                <input id="password" name="password" type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Enter your password" />
+                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" /> : <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />}
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" disabled={loading} className="w-full flex items-center justify-center px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg disabled:bg-emerald-300 disabled:cursor-not-allowed">
               <span>{loading ? 'Signing In...' : 'Sign In'}</span>
               {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
             </button>

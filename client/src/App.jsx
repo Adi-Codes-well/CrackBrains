@@ -32,6 +32,7 @@ const App = () => {
       <Route path="/role-selection" element={<RoleSelection />} />
 
       {/* --- PROTECTED ROUTES WRAPPER --- */}
+      {/* Any route nested inside here will require a user to be logged in */}
       <Route element={<ProtectedRoute />}>
         {/* Vendor Routes */}
         <Route path="/vendor/dashboard" element={<VendorDashboard />} />
@@ -51,12 +52,7 @@ const App = () => {
       </Route>
       
       {/* Fallback for any unmatched URL */}
-      <Route path="*" element={
-          <div className="flex flex-col items-center justify-center h-screen">
-              <h2 className="text-3xl font-bold mb-4">404 - Page Not Found</h2>
-              <Link to="/" className="text-emerald-600 hover:underline">Go back to Home</Link>
-          </div>
-      } />
+      <Route path="*" element={<div><h2>404 Page Not Found</h2></div>} />
     </Routes>
   );
 };
