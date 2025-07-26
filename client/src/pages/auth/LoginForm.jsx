@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import axios from 'axios';
 
 const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login submitted:', formData);
-    // Add your authentication logic here
+    try {
+      const res = await axios.post('/api/auth/login', { email, password });
+      localStorage.setItem('token', res.data.token);
+      alert('Login successful');
+      // Redirect to dashboard based on role
+    } catch (err) {
+      alert('Login failed');
+    }
   };
 
   return (
@@ -48,8 +46,8 @@ const LoginForm = () => {
                   name="email"
                   type="email"
                   required
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200"
                   placeholder="Enter your email"
                 />
@@ -70,8 +68,8 @@ const LoginForm = () => {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   required
-                  value={formData.password}
-                  onChange={handleInputChange}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200"
                   placeholder="Enter your password"
                 />
