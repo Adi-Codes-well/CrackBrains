@@ -13,11 +13,11 @@ import OrdersReceived from './pages/supplier/OrdersReceived';
 import TrustScoreDisplay from './pages/supplier/TrustScoreDisplay';
 import LoginForm from './pages/auth/LoginForm';
 import RoleSelection from './pages/auth/RoleSelection';
-
+import SignupForm from './pages/auth/SignupForm';
+import UserProfile from './pages/auth/UserProfile';
 const App = () => {
   return (
-    // <VendorDashboard/>
-
+    
     <Routes>
 
       <Route path="/vendor/dashboard" element={<VendorDashboard />} />
@@ -33,6 +33,8 @@ const App = () => {
       <Route path="/supplier/trust-score" element={<TrustScoreDisplay />} />
       <Route path="/auth/login" element={<LoginForm />} />
       <Route path="/auth/role-selection" element={<RoleSelection />} />
+      <Route path="/auth/signup" element={<SignupForm />} />
+      <Route path="/auth/user-profile" element={<UserProfile />} />
 
     </Routes>
 
