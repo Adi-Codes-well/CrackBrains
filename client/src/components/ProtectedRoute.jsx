@@ -1,13 +1,11 @@
-// client/src/components/ProtectedRoute.jsx
-
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
   const token = localStorage.getItem('token');
 
-  // If a token exists, allow access to the nested routes (the <Outlet />).
-  // If not, redirect the user to the login page.
+  // If a token exists, the user can access the page.
+  // Otherwise, they are redirected to the login page.
   return token ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
