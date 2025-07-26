@@ -129,10 +129,12 @@ const VendorDashboard = () => {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <button className="flex items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors duration-200 group">
+              <a href="/vendor/browse" className="flex items-center justify-center p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 group">
+                <button className="flex items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors duration-200 group">
                 <Search className="w-5 h-5 text-emerald-600 mr-2" />
                 <span className="text-emerald-700 font-medium">Browse Products</span>
               </button>
+              </a>
               <button className="flex items-center justify-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors duration-200 group">
                 <ShoppingCart className="w-5 h-5 text-blue-600 mr-2" />
                 <span className="text-blue-700 font-medium">View Orders</span>

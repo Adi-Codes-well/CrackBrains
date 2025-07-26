@@ -11,53 +11,59 @@ const BrowseProducts = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [priceRange, setPriceRange] = useState([0, 10000]);
+    const [trustScoreMin, setTrustScoreMin] = useState(0);
 
+    // This useEffect will run once on component mount to fetch all initial products
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchInitialProducts = async () => {
             setLoading(true);
             setError('');
             try {
-                // **FIX:** Use a relative path so the Vite proxy can catch it.
                 const response = await axios.get('/api/products');
-
                 if (Array.isArray(response.data)) {
                     setProducts(response.data);
                 } else {
-                    console.error("API did not return an array of products:", response.data);
                     setError('Received invalid data from server.');
                     setProducts([]);
                 }
             } catch (err) {
-                console.error("Failed to fetch products:", err);
                 setError('Could not load products. Please ensure the server is running.');
                 setProducts([]);
             } finally {
                 setLoading(false);
             }
         };
-        fetchProducts();
-    }, []);
+        fetchInitialProducts();
+    }, []); // Empty dependency array ensures this runs only once
 
-    const categories = useMemo(() => {
-        if (!Array.isArray(products)) return [];
-        return [...new Set(products.map(p => p.category))];
-    }, [products]);
-
+    // You can add a separate useEffect for handling filter changes if needed
+    // For now, the filtering will be done on the client side for simplicity
     const filteredProducts = useMemo(() => {
-        if (!Array.isArray(products)) return [];
         return products.filter(product => {
             const lowestPrice = product.priceTiers?.length > 0
                 ? Math.min(...product.priceTiers.map(t => t.pricePerUnit))
                 : 0;
+
             const matchesSearch = searchTerm === '' ||
                 product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 (product.supplierId && product.supplierId.name.toLowerCase().includes(searchTerm.toLowerCase()));
+            
             const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+            
             const matchesPrice = lowestPrice >= priceRange[0] && lowestPrice <= priceRange[1];
+
+            // Note: Client-side trust score filtering is not possible without fetching all scores first.
+            // This setup assumes the backend handles trust score filtering when the `trustScoreMin` is used in a fetch call.
+            
             return matchesSearch && matchesCategory && matchesPrice;
         });
     }, [products, searchTerm, selectedCategories, priceRange]);
-    
+
+
+    const categories = useMemo(() => {
+        return ['Food & Beverages', 'Electronics', 'Textiles & Clothing', 'Stationery', 'Industrial Supplies'];
+    }, []);
+
     const handleCategoryChange = (category) => {
         setSelectedCategories(prev =>
             prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]
@@ -76,6 +82,12 @@ const BrowseProducts = () => {
                     {product.supplierId?.isVerifiedSupplier && (
                         <div className="absolute top-3 left-3 bg-emerald-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
                             <Shield className="w-3 h-3 mr-1" /> Verified
+                        </div>
+                    )}
+                    {product.trustScore && (
+                        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                            <Star className="w-3 h-3 text-yellow-500 mr-1 fill-current" />
+                            {product.trustScore}
                         </div>
                     )}
                 </div>
@@ -140,6 +152,24 @@ const BrowseProducts = () => {
                             <div className="flex justify-between text-xs text-gray-500 mt-1">
                                 <span>₹0</span>
                                 <span>₹{priceRange[1].toLocaleString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-sm font-medium text-gray-700 mb-3">Minimum Trust Score</label>
+                        <div className="px-2">
+                            <input 
+                                type="range" 
+                                min="0" 
+                                max="100" 
+                                step="5" 
+                                value={trustScoreMin} 
+                                onChange={(e) => setTrustScoreMin(parseInt(e.target.value))} 
+                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" 
+                            />
+                            <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Any</span>
+                                <span>{trustScoreMin}+</span>
                             </div>
                         </div>
                     </div>

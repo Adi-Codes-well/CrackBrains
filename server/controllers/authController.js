@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// Register a new user
+//register
 exports.register = async (req, res) => {
     const { name, email, password, role } = req.body;
 
@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: "User with this email already exists" });
+            return res.status(400).json({ message: "User already exists" });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -28,16 +28,17 @@ exports.register = async (req, res) => {
 
         await user.save();
 
-        // Don't send a token on register, just a success message.
-        // This encourages the user to go to the login page.
-        res.status(201).json({ message: "User registered successfully" });
+        // FIX: Use 'id' instead of 'userId' for consistency
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+        res.status(201).json({ message: "User registered successfully", token });
     } catch (error) {
-        console.error("Register Error:", error);
+        console.error(error);
         res.status(500).json({ message: "Internal server error" });
     }
-};
+}
 
-// Login an existing user
+//login
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -55,32 +56,25 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid email or password" });
         }
-        
-        // FIX: The payload should contain the user's database ID and role.
-        const payload = {
-            userId: user._id, // Use user._id
-            role: user.role
-        };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" });
+        // FIX: Use 'id' instead of 'userId' for consistency
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
         res.status(200).json({ message: "Login successful", token });
     } catch (error) {
-        console.error("Login Error:", error);
+        console.error(error);
         res.status(500).json({ message: "Internal server error" });
     }
-};
+}
 
-// Get the currently logged-in user's data
+// Get current user (protected routes)
 exports.getMe = async (req, res) => {
   try {
-    // req.user is populated by the authMiddleware from the token
-    const user = await User.findById(req.user.userId).select('-password');
-    if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-    }
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
-  } catch (err) {
+  } catch (err)
+ {
     res.status(500).json({ message: 'Server error' });
   }
 };
