@@ -15,9 +15,17 @@ import LoginForm from './pages/auth/LoginForm';
 import RoleSelection from './pages/auth/RoleSelection';
 import SignupForm from './pages/auth/SignupForm';
 import UserProfile from './pages/auth/UserProfile';
+import Navbar from './common/Navbar';
+import Footer from './common/Footer';
+import ReviewCard from './common/ReviewCard';
+import ErrorMessage from './common/ErrorMessage';
+import TrustScoreBadge from './common/TrustBadge';
+import VerificationBadge from './common/VerificationBatch';
+import Home from './pages/Home';
+
 const App = () => {
   return (
-    
+
     <Routes>
 
       <Route path="/vendor/dashboard" element={<VendorDashboard />} />
@@ -31,10 +39,21 @@ const App = () => {
       <Route path="/supplier/add-product" element={<AddProductForm />} />
       <Route path="/supplier/orders-received" element={<OrdersReceived />} />
       <Route path="/supplier/trust-score" element={<TrustScoreDisplay />} />
-      <Route path="/auth/login" element={<LoginForm />} />
-      <Route path="/auth/role-selection" element={<RoleSelection />} />
-      <Route path="/auth/signup" element={<SignupForm />} />
-      <Route path="/auth/user-profile" element={<UserProfile />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/role-selection" element={<RoleSelection />} />
+      <Route path="/signup" element={<SignupForm />} />
+      <Route path="/user-profile" element={<UserProfile />} />
+      {/* <Route path="/navbar" element={<Navbar />} /> */}
+      <Route path="/footer" element={<Footer />} />
+      <Route path="/review-card" element={<ReviewCard />} />
+      <Route path="/error" element={<ErrorMessage />} />
+      <Route path="/trust-badge" element={<TrustScoreBadge />} />
+      <Route path="/verification-badge" element={<VerificationBadge />} />
+      <Route path="/" element={<Home />} />
+      
+      {/* Default route for unmatched paths */}
+      
+  
 
     </Routes>
 
