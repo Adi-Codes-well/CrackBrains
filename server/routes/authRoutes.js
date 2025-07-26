@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { register, login, getMe } = require('../controllers/authController');
 const auth = require('../middleware/authMiddleware');
-const upload = require('../config/cloudinary'); // 👈 1. IMPORT UPLOAD MIDDLEWARE
+const multer = require('multer');
+const upload = multer(); // Initialize multer
 
 // Public Routes
-// FIX: Add upload.none() to handle the multipart form data from the signup page
-router.post('/register', upload.none(), register); // 👈 2. ADD IT HERE
+// FIX: Use upload.none() to correctly handle multipart form data without file uploads.
+router.post('/register', upload.none(), register);
 router.post('/login', login);
 
 // Protected Routes
