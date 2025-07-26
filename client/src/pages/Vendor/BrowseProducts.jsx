@@ -9,6 +9,7 @@ import {
     Shield,
     TrendingUp
 } from 'lucide-react';
+import Navbar from '../../common/Navbar';
 
 const BrowseProducts = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -27,7 +28,7 @@ const BrowseProducts = () => {
             supplier: 'GoodGrain Wholesalers',
             trustScore: 4.8,
             location: 'Delhi',
-            image: 'https://images.pexels.com/photos/33239/rice-grain-seed-food.jpg?auto=compress&cs=tinysrgb&w=300',
+            image: 'https://www.thespruceeats.com/thmb/dcr8sHq3QyEfm2DmmRTK4UZ2uiA=/5184x3456/filters:no_upscale():max_bytes(150000):strip_icc()/basmati-rice-in-a-bowl-with-a-spoon-519309138-7ca58970c0914bb9b117d43cb09d7dd8.jpg',
             verified: true,
             rating: 4.7,
             reviewCount: 156
@@ -132,6 +133,7 @@ const BrowseProducts = () => {
 
     const ProductCard = ({ product }) => (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer">
+            <Navbar />
             <div className="relative">
                 <img
                     src={product.image}
@@ -178,7 +180,7 @@ const BrowseProducts = () => {
                 <div className="mt-4 pt-3 border-t border-gray-100">
                     <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center">
                         <Package className="w-4 h-4 mr-2" />
-                        View Details
+                        <a href="/vendor/details">View Details</a>
                     </button>
                 </div>
             </div>
@@ -275,9 +277,7 @@ const BrowseProducts = () => {
                 <div className="flex items-center justify-between mb-6">
                     <div>
                         <h1 className="text-2xl font-bold text-gray-900">Browse Products</h1>
-                        <p className="text-gray-600 mt-1">
-                            Showing {filteredProducts.length} products from verified suppliers
-                        </p>
+                        
                     </div>
                     <div className="flex items-center space-x-4">
                         <div className="flex items-center text-sm text-gray-600">
