@@ -94,3 +94,20 @@ exports.deleteProduct = async (req, res) => {
     res.status(500).json({ message: 'Error', error: err.message });
   }
 };
+
+exports.addProduct = async (req, res) => {
+  const { name, description, priceTiers, category } = req.body;
+  const images = req.files.map(file => file.path); // Cloudinary URLs
+
+  const product = new Product({
+    name,
+    description,
+    priceTiers: JSON.parse(priceTiers),
+    category,
+    supplierId: req.user.userId,
+    images,
+  });
+
+  await product.save();
+  res.status(201).json({ message: 'Product added', product });
+};
