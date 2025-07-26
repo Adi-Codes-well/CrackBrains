@@ -1,7 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
 const supplierRoutes = require('./routes/supplierRoutes');
@@ -13,6 +13,10 @@ const trustRoutes = require('./routes/trustRoutes');
 
 const paymentRoutes = require('./routes/paymentRoutes');
 
+const connectDB = require('./config/db'); // 👈 Import the connection function
+
+// --- Connect to Database ---
+connectDB(); 
 
 const app = express();
 app.use(cors());
