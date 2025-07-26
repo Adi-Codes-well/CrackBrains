@@ -12,6 +12,7 @@ import AddProductForm from './pages/supplier/AddProductForm';
 import OrdersReceived from './pages/supplier/OrdersReceived';
 import TrustScoreDisplay from './pages/supplier/TrustScoreDisplay';
 import LoginForm from './pages/auth/LoginForm';
+import RoleSelection from './pages/auth/RoleSelection';
 
 const App = () => {
   return (
@@ -25,12 +26,13 @@ const App = () => {
       <Route path="/vendor/orders" element={<MyOrders />} />
       <Route path="/vendor/review" element={<SubmitReview />} />
       <Route path="/supplier/dashboard" element={<SupplierDashboard />} />
-      <Route path="/supplier/orders/" element={<OrderManageCard />} />
+      <Route path="/supplier/orders" element={<OrderManageCard />} />
       <Route path="/supplier/products" element={<ProductManageCard />} />
       <Route path="/supplier/add-product" element={<AddProductForm />} />
       <Route path="/supplier/orders-received" element={<OrdersReceived />} />
       <Route path="/supplier/trust-score" element={<TrustScoreDisplay />} />
       <Route path="/auth/login" element={<LoginForm />} />
+      <Route path="/auth/role-selection" element={<RoleSelection />} />
 
     </Routes>
 
