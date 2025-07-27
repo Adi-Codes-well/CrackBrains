@@ -54,7 +54,7 @@ const ProductDetails = () => {
           return;
       }
       try {
-          await axios.post(`/api/orders`, 
+          await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/orders`, 
               { productId: product._id, quantity },
               { headers: { 'Authorization': token } }
           );
