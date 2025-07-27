@@ -37,26 +37,26 @@ const SupplierDashboard = () => {
         }
 
         // 1. Fetch supplier's own profile data
-        const userRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/auth/me', {
+        const userRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/api/auth/me', {
           headers: { Authorization: token },
         });
         setSupplierData(userRes.data);
         const currentSupplierId = userRes.data._id; // Get supplier ID for trust score
 
         // 2. Fetch supplier's products
-        const productsRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/products/myproducts', {
+        const productsRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/api/products/myproducts', {
           headers: { Authorization: token },
         });
         setProducts(productsRes.data);
 
         // 3. Fetch supplier's orders
-        const ordersRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/orders/supplier', {
+        const ordersRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/api/orders/supplier', {
           headers: { Authorization: token },
         });
         setOrders(ordersRes.data);
 
         // 4. Fetch trust score for the current supplier
-        const trustRes = await axios.get(`/api/trust/${currentSupplierId}`, {
+        const trustRes = await axios.get(`${import.meta.env.VITE_APP_API_BASE_URL}/api/trust/${currentSupplierId}`, {
             headers: { Authorization: token },
         });
         setTrustScore(trustRes.data.trustScore);
