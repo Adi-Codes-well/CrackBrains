@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Target, 
-  Users, 
-  Award, 
-  TrendingUp, 
+import {
+  Target,
+  Users,
+  Award,
+  TrendingUp,
   Heart,
   Globe,
   Shield,
@@ -17,6 +17,7 @@ import {
   Twitter,
   Instagram
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AboutPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -80,7 +81,7 @@ const AboutPage = () => {
       name: "Ankit Kumar",
       role: "Founder & CEO",
       description: "A young entrepreneur with a vision to transform B2B commerce in India.",
-      image: ""
+      image: "https://via.placeholder.com/150"
     },
     {
       name: "Priya Patel",
@@ -142,11 +143,11 @@ const AboutPage = () => {
               <span className="ml-2 text-sm text-gray-600 hidden sm:block">Business Bridge</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Home</a>
-              <a href="/vendors" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</a>
-              <a href="/suppliers" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</a>
-              <a href="/trust-engine" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Trust Engine</a>
-              <a href="/about" className="text-emerald-600 font-medium">About</a>
+              <Link to="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Home</Link>
+              <Link to="/vendor" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</Link>
+              <Link to="/supplier" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</Link>
+              <Link to="/trust-engine" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Trust Engine</Link>
+              <Link to="/about" className="text-emerald-600 font-medium">About</Link>
             </div>
           </div>
         </div>
@@ -224,7 +225,7 @@ const AboutPage = () => {
               These values guide every decision we make and every feature we build at VyaparSetu.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => {
               const IconComponent = value.icon;
@@ -253,13 +254,13 @@ const AboutPage = () => {
               Meet the passionate leaders driving VyaparSetu's mission to transform B2B commerce in India.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
               <div key={index} className="text-center animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
                 <div className="relative mb-6">
-                  <img 
-                    src={member.image} 
+                  <img
+                    src={member.image}
                     alt={member.name}
                     className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-emerald-100"
                   />
@@ -284,7 +285,7 @@ const AboutPage = () => {
               Have questions about VyaparSetu? We'd love to hear from you.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center text-white">
               <div className="bg-emerald-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -297,7 +298,7 @@ const AboutPage = () => {
                 West Bengal, India - 700091
               </p>
             </div>
-            
+
             <div className="text-center text-white">
               <div className="bg-emerald-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-8 h-8" />
@@ -309,7 +310,7 @@ const AboutPage = () => {
                 Business: business@vyaparsetu.com
               </p>
             </div>
-            
+
             <div className="text-center text-white">
               <div className="bg-emerald-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-8 h-8" />
@@ -322,7 +323,7 @@ const AboutPage = () => {
               </p>
             </div>
           </div>
-          
+
           <div className="text-center mt-12">
             <h3 className="text-lg font-semibold text-white mb-4">Follow Us</h3>
             <div className="flex justify-center space-x-4">
@@ -350,7 +351,7 @@ const AboutPage = () => {
                 Transforming B2B commerce in India through trust, transparency, and technology. Building bridges between businesses nationwide.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-300">
@@ -358,17 +359,17 @@ const AboutPage = () => {
                 <li><a href="#Our Team" className="hover:text-emerald-400 transition-colors">Our Team</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-gray-300">
                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Terms of Service</a></li>
-                
+
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-700 pt-8 text-center">
             <p className="text-gray-400 text-sm">© 2024 VyaparSetu Technologies Pvt. Ltd. All rights reserved.</p>
           </div>

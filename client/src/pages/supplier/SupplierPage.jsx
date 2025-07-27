@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Users, 
-  Shield, 
-  TrendingUp, 
-  Package, 
+import {
+  Users,
+  Shield,
+  TrendingUp,
+  Package,
   IndianRupee,
   Globe,
   Star,
@@ -17,6 +17,7 @@ import {
   Truck,
   CreditCard
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SupplierPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -151,10 +152,10 @@ const SupplierPage = () => {
               <span className="ml-2 text-sm text-gray-600 hidden sm:block">Business Bridge</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"><a href="/">Home</a></a>
-              <a href="/vendors" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"><a href="/vendor">For Vendors</a></a>
-              <a href="/suppliers" className="text-emerald-600 font-medium"><a href="/supplier">For Suppliers</a></a>
-              <a href="#" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"><a href="/about">About</a></a>
+              <Link to="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Home</Link>
+              <Link to="/vendor" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</Link>
+              <Link to="/supplier" className="text-emerald-600 font-medium">For Suppliers</Link>
+              <Link to="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</Link>
             </div>
           </div>
         </div>
@@ -193,9 +194,9 @@ const SupplierPage = () => {
                     Trust Score: 4.9
                   </div>
                 </div>
-                <img 
-                  src="https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg?auto=compress&cs=tinysrgb&w=600" 
-                  alt="Supplier Dashboard" 
+                <img
+                  src="https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="Supplier Dashboard"
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
                 <div className="space-y-3">
@@ -232,7 +233,7 @@ const SupplierPage = () => {
               From local supplier to national distributor - we provide the platform, tools, and network to scale your business across India.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
@@ -244,7 +245,7 @@ const SupplierPage = () => {
                 green: 'bg-green-100 text-green-600',
                 red: 'bg-red-100 text-red-600'
               };
-              
+
               return (
                 <div key={index} className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 group animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
                   <div className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${colorClasses[benefit.color]}`}>
@@ -270,7 +271,7 @@ const SupplierPage = () => {
               Real metrics from suppliers who've transformed their business with VyaparSetu
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {successMetrics.map((metric, index) => (
               <div key={index} className="text-center text-white">
@@ -294,7 +295,7 @@ const SupplierPage = () => {
               Everything you need to manage and grow your supply business efficiently
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
@@ -325,7 +326,7 @@ const SupplierPage = () => {
               Hear from suppliers who've scaled their business and increased revenue with VyaparSetu
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300">
@@ -361,7 +362,7 @@ const SupplierPage = () => {
               We're committed to your success with comprehensive support and innovative solutions
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="bg-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -405,7 +406,7 @@ const SupplierPage = () => {
                 Empowering Indian suppliers to reach millions of vendors through our trusted B2B marketplace platform.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">For Suppliers</h4>
               <ul className="space-y-2 text-gray-300">
@@ -415,7 +416,7 @@ const SupplierPage = () => {
                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Support Center</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-300">
@@ -426,7 +427,7 @@ const SupplierPage = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
             <p className="text-gray-400 text-sm">© 2024 VyaparSetu. All rights reserved.</p>
           </div>
