@@ -19,7 +19,8 @@ const BrowseProducts = () => {
             setLoading(true);
             setError('');
             try {
-                const response = await axios.get('/api/products');
+                const response = await axios.get(`${import.meta.env.VITE_APP_API_BASE_URL}/products`, {params});
+
                 if (Array.isArray(response.data)) {
                     setProducts(response.data);
                 } else {

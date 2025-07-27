@@ -25,7 +25,7 @@ const ProductDetails = () => {
       setError('');
       try {
         // Fetch product details
-        const productRes = await axios.get(`/api/products/${id}`);
+        const productRes = await axios.get(`${import.meta.env.VITE_APP_API_BASE_URL}/products/${id}`);
         setProduct(productRes.data);
         if (productRes.data.priceTiers && productRes.data.priceTiers.length > 0) {
           setQuantity(productRes.data.priceTiers[0].minQty || 1);

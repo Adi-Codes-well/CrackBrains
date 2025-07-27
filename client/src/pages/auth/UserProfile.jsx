@@ -41,7 +41,7 @@ const UserProfile = () => {
           setLoading(false);
           return;
         }
-        const response = await axios.get('/api/auth/me', {
+        const response = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/auth/me', {
           headers: { Authorization: token },
         });
         setUserData(response.data);
