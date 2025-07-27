@@ -1,27 +1,39 @@
 import React from 'react';
 import { Star, Shield, TrendingUp, CheckCircle } from 'lucide-react';
 
-const TrustScoreDisplay = () => {
-  const trustScore = 4.8;
-  const maxScore = 5.0;
-  const percentage = (trustScore / maxScore) * 100;
+// Accept 'score' as a prop
+const TrustScoreDisplay = ({ score = 0 }) => {
+  const maxScore = 100; // Assuming trust score is out of 100 as per calculateTrustScore.js
+  const percentage = (score / maxScore) * 100;
 
+  // Function to determine text message based on score range
+  const getTrustLevelMessage = (currentScore) => {
+    if (currentScore >= 80) return "Excellent Trust Score";
+    if (currentScore >= 60) return "Good Trust Score";
+    if (currentScore >= 40) return "Developing Trust";
+    return "Low Trust Score - Requires attention";
+  };
+
+  // Note: These metrics are illustrative. To make them dynamic,
+  // your backend's calculateTrustScore would need to expose these individual metrics,
+  // and the SupplierDashboard would need to fetch and pass them down.
+  // For now, they remain as examples.
   const metrics = [
     {
       label: 'Average Customer Rating',
-      value: '4.9 stars',
+      value: 'N/A', // Placeholder, would be dynamic if available from API
       icon: Star,
       color: 'text-yellow-500'
     },
     {
       label: 'Order Fulfillment Rate',
-      value: '98%',
+      value: 'N/A', // Placeholder, would be dynamic if available from API
       icon: TrendingUp,
       color: 'text-green-500'
     },
     {
       label: 'Platform Verification',
-      value: 'Verified',
+      value: 'N/A', // Placeholder, would be dynamic if available from supplierData
       icon: Shield,
       color: 'text-blue-500'
     }
@@ -31,10 +43,9 @@ const TrustScoreDisplay = () => {
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-6">Your Trust Score</h3>
       
-      {/* Main Trust Score Display */}
       <div className="text-center mb-8">
         <div className="relative inline-flex items-center justify-center">
-          {/* Circular Progress */}
+          {/* Circular Progress Bar */}
           <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
             <circle
               cx="60"
@@ -48,32 +59,32 @@ const TrustScoreDisplay = () => {
               cx="60"
               cy="60"
               r="50"
-              stroke="#10b981"
+              stroke="#10b981" // Emerald green for progress
               strokeWidth="8"
               fill="none"
               strokeLinecap="round"
-              strokeDasharray={`${2 * Math.PI * 50}`}
-              strokeDashoffset={`${2 * Math.PI * 50 * (1 - percentage / 100)}`}
+              strokeDasharray={2 * Math.PI * 50}
+              strokeDashoffset={2 * Math.PI * 50 * (1 - percentage / 100)}
               className="transition-all duration-1000 ease-out"
             />
           </svg>
           
           {/* Score Text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-3xl font-bold text-gray-900">{trustScore}</span>
-            <span className="text-sm text-gray-500">/ {maxScore}</span>
+            <span className="text-3xl font-bold text-gray-900">{score !== null ? score.toFixed(1) : 'N/A'}</span>
+            <span className="text-sm text-gray-500">/ {maxScore.toFixed(0)}</span>
           </div>
         </div>
         
         <div className="mt-4">
-          <p className="text-lg font-semibold text-gray-900">Excellent Trust Score</p>
-          <p className="text-sm text-gray-600">You're in the top 10% of suppliers</p>
+          <p className="text-lg font-semibold text-gray-900">{getTrustLevelMessage(score)}</p>
+          <p className="text-sm text-gray-600">This score is dynamically calculated based on your performance.</p>
         </div>
       </div>
 
-      {/* Metrics Breakdown */}
+      {/* Metrics Breakdown (Illustrative) */}
       <div className="space-y-4">
-        <h4 className="font-medium text-gray-900 mb-3">Score Breakdown</h4>
+        <h4 className="font-medium text-gray-900 mb-3">Score Breakdown (Illustrative)</h4>
         {metrics.map((metric, index) => {
           const IconComponent = metric.icon;
           return (
