@@ -15,7 +15,7 @@ const OrdersReceived = () => {
     setError('');
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/orders/supplier', {
+      const response = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/orders/supplier', {
         headers: { Authorization: token },
       });
       setOrders(response.data);
