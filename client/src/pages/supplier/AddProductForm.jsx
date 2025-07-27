@@ -71,7 +71,7 @@ const AddProductForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${import.meta.env.VITE_APP_API_BASE_URL}/api/products`, formData, {
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/products`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': token
