@@ -17,9 +17,10 @@ import SubmitReview from './pages/Vendor/SubmitReview';
 import SupplierDashboard from './pages/supplier/SupplierDashBoard';
 import AddProductForm from './pages/supplier/AddProductForm';
 import OrdersReceived from './pages/supplier/OrdersReceived';
-import ProductManageCard from './pages/supplier/ProductManageCard';
+// import ProductManageCard from './pages/supplier/ProductManageCard';
 
 import ProtectedRoute from './components/ProtectedRoute'; 
+import MyProducts from './pages/supplier/myProduct';
 
 const App = () => {
   return (
@@ -39,7 +40,8 @@ const App = () => {
 
         {/* Supplier Routes */}
         <Route path="/supplier/dashboard" element={<SupplierDashboard />} />
-        <Route path="/supplier/products" element={<ProductManageCard />} />
+        {/* <Route path="/supplier/products" element={<ProductManageCard />} /> */}
+         <Route path="/supplier/products" element={<MyProducts />} />
         <Route path="/supplier/add-product" element={<AddProductForm />} />
         <Route path="/supplier/orders-received" element={<OrdersReceived />} />
         
