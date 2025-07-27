@@ -136,5 +136,4 @@ const OrdersReceived = () => {
     </div>
   );
 };
-
 export default OrdersReceived;

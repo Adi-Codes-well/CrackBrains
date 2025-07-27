@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 exports.uploadVerificationDocs = async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user.id; // FIX
 
     if(req.user.role !== 'supplier') {
         return res.status(403).json({ message: "Access denied. Only suppliers can upload verification documents." });

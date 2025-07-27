@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Edit, Trash2, Eye, MoreVertical } from 'lucide-react';
+import axios from 'axios'; // Import axios
 
 const ProductManageCard = ({
   product = {
@@ -10,7 +11,7 @@ const ProductManageCard = ({
     price: 2200,
     stock: 150,
     status: 'active'
-  }
+  }, onDelete 
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -44,11 +45,28 @@ const ProductManageCard = ({
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
       setIsDeleting(true);
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setIsDeleting(false);
-      console.log('Product deleted:', product.id);
+      try {
+        // Get the authentication token from local storage
+        const token = localStorage.getItem('token');
+        
+        // Make the actual API call to the backend
+        await axios.delete(`/api/products/${product._id}`, { // Use product._id
+          headers: { Authorization: token },
+        });
+
+        // If the deletion is successful, call the onDelete prop
+        if (onDelete) {
+          onDelete(product._id); // Pass the ID of the deleted product back to the parent
+        }
+
+      } catch (err) {
+        alert('Failed to delete product. Please try again.');
+        console.error(err);
+      } finally {
+        setIsDeleting(false);
+      }
     }
-  };
+  }
 
   const handleEdit = () => {
     console.log('Edit product:', product.id);

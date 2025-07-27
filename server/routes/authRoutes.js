@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, getMe } = require('../controllers/authController');
+const { register, login, getMe, updateMe } = require('../controllers/authController');
 const auth = require('../middleware/authMiddleware');
 const multer = require('multer');
 const upload = multer(); // Initialize multer
@@ -12,5 +12,6 @@ router.post('/login', login);
 
 // Protected Routes
 router.get('/me', auth, getMe);
+router.put('/me', auth, upload.none(), updateMe);
 
 module.exports = router;
