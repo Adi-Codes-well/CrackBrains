@@ -125,10 +125,7 @@ const VyaparSetuLanding = () => {
                             <Link to="/user-profile"><button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">
                                 <User className="w-5 h-5" />
                             </button></Link>
-                            {/* <button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors relative">
-                                <ShoppingCart className="w-5 h-5" />
-                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                            </button> */}
+    
                         </div>
                     </div>
                 </div>
