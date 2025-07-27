@@ -8,8 +8,8 @@ import SignupForm from './pages/auth/SignupForm';
 import UserProfile from './pages/auth/UserProfile';
 import RoleSelection from './pages/auth/RoleSelection';
 
-import VendorDashboard from './pages/vendor/VendorDashboard';
-import BrowseProducts from './pages/vendor/BrowseProducts';
+import VendorDashboard from './pages/Vendor/VendorDashboard';
+import BrowseProducts from './pages/Vendor/BrowseProducts';
 import ProductDetails from './pages/Vendor/ProductDetails';
 import MyOrders from './pages/Vendor/MyOrders';
 import SubmitReview from './pages/Vendor/SubmitReview';

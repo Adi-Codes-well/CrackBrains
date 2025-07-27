@@ -65,7 +65,7 @@ const UserProfile = () => {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put('/api/auth/me', editData, {
+      const response = await axios.put(`${import.meta.env.VITE_APP_API_URL}/api/auth/me`, editData, {
         headers: { Authorization: token },
       });
       setUserData(response.data);
