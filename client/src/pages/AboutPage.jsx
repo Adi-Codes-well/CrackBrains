@@ -81,7 +81,9 @@ const AboutPage = () => {
       name: "Ankit Kumar",
       role: "Founder & CEO",
       description: "A young entrepreneur with a vision to transform B2B commerce in India.",
+
       image: "https://via.placeholder.com/150"
+
     },
     {
       name: "Priya Patel",
