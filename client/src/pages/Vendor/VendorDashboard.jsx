@@ -11,12 +11,13 @@ import {
   TrendingUp,
   IndianRupee
 } from 'lucide-react';
-import axios from 'axios'; // For making API requests
-import { Link } from 'react-router-dom'; // For navigation
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const VendorDashboard = () => {
   const [vendorData, setVendorData] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [reviewsLeftCount, setReviewsLeftCount] = useState(0); // Add state for reviews
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -32,21 +33,22 @@ const VendorDashboard = () => {
           return;
         }
 
-        // 1. Fetch vendor's own profile data
-        const userRes = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/auth/me`, {
-          headers: { Authorization: token },
-        });
+        // Fetch all data in parallel for better performance
+        const [userRes, ordersRes, reviewsRes] = await Promise.all([
+          axios.get(`${import.meta.env.VITE_APP_API_URL}/api/auth/me`, {
+            headers: { Authorization: token },
+          }),
+          axios.get(`${import.meta.env.VITE_APP_API_URL}/api/orders/vendor`, {
+            headers: { Authorization: token },
+          }),
+          axios.get(`${import.meta.env.VITE_APP_API_URL}/api/reviews/vendor`, {
+            headers: { Authorization: token },
+          }),
+        ]);
+
         setVendorData(userRes.data);
-
-        // 2. Fetch vendor's orders
-        const ordersRes = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/orders/vendor`, {
-          headers: { Authorization: token },
-        });
         setOrders(ordersRes.data);
-
-        // You might want to fetch reviews count here if you have a backend API for it
-        // const reviewsRes = await axios.get('/api/reviews/vendor-count', { headers: { Authorization: token } });
-        // setReviewsLeftCount(reviewsRes.data.count);
+        setReviewsLeftCount(reviewsRes.data.length); // Set the dynamic review count
 
       } catch (err) {
         console.error("Failed to fetch dashboard data:", err);
@@ -65,7 +67,7 @@ const VendorDashboard = () => {
   // Note: 'Reviews Left' would require fetching reviews associated with the vendor,
   // which your current backend doesn't explicitly expose for a vendor to list their own reviews easily.
   // It's kept as illustrative for now.
-  const reviewsLeftCount = 89; // Placeholder, modify if you implement a backend API for this
+  // Use the reviewsLeftCount state variable set from API response
 
   const navigationItems = [
     { icon: Home, label: 'Dashboard', active: true, href: '/vendor/dashboard' },
@@ -94,7 +96,7 @@ const VendorDashboard = () => {
     },
     {
       title: 'Reviews Left',
-      value: reviewsLeftCount, // This remains a placeholder unless you fetch actual review count
+      value: reviewsLeftCount, // This is now dynamic
       icon: MessageSquare,
       color: 'bg-blue-500',
       bgColor: 'bg-blue-50',
