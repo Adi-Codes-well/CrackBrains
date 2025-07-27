@@ -1,68 +1,88 @@
 import React, { useState } from 'react';
 import { Edit, Trash2, Eye, MoreVertical } from 'lucide-react';
+import axios from 'axios';
 
-const ProductManageCard = ({
-  product = {
-    id: '1',
-    name: 'Premium Basmati Rice 25kg',
-    image: 'https://images.pexels.com/photos/33239/rice-grain-seed-food.jpg?auto=compress&cs=tinysrgb&w=300',
-    category: 'Food & Beverages',
-    price: 2200,
-    stock: 150,
-    status: 'active'
-  }
-}) => {
+// Accept an `onDelete` function as a prop
+const ProductManageCard = ({ product, onDelete }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Default product object for safety, though it should always receive one
+  if (!product) {
+    product = {
+        _id: 'default',
+        name: 'Default Product',
+        image: 'https://via.placeholder.com/300',
+        category: 'N/A',
+        priceTiers: [{ pricePerUnit: 0 }],
+        stock: 0,
+        status: 'inactive'
+    }
+  }
+
+  // Calculate the lowest price from priceTiers for display
+  const lowestPrice = product.priceTiers && product.priceTiers.length > 0
+    ? Math.min(...product.priceTiers.map(t => t.pricePerUnit))
+    : 0;
+
   const getStatusColor = (status) => {
     switch (status) {
-      case 'active':
-        return 'bg-green-100 text-green-800';
-      case 'inactive':
-        return 'bg-gray-100 text-gray-800';
-      case 'out_of_stock':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'inactive': return 'bg-gray-100 text-gray-800';
+      case 'out_of_stock': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getStatusText = (status) => {
     switch (status) {
-      case 'active':
-        return 'Active';
-      case 'inactive':
-        return 'Inactive';
-      case 'out_of_stock':
-        return 'Out of Stock';
-      default:
-        return 'Unknown';
+      case 'active': return 'Active';
+      case 'inactive': return 'Inactive';
+      case 'out_of_stock': return 'Out of Stock';
+      default: return 'Unknown';
     }
   };
 
   const handleDelete = async () => {
+    // FIX: Use product._id, which is the actual ID from MongoDB
     if (window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
       setIsDeleting(true);
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setIsDeleting(false);
-      console.log('Product deleted:', product.id);
+      try {
+        const token = localStorage.getItem('token');
+        // The API call now uses the correct ID property
+        await axios.delete(`/api/products/${product._id}`, {
+          headers: { Authorization: token },
+        });
+
+        if (onDelete) {
+          onDelete(product._id);
+        }
+      } catch (err) {
+        alert('Failed to delete product. Please try again.');
+        console.error(err);
+      } finally {
+        setIsDeleting(false);
+      }
     }
   };
 
   const handleEdit = () => {
-    console.log('Edit product:', product.id);
+    // FIX: Use product._id
+    console.log('Edit product:', product._id);
   };
 
   const handleView = () => {
-    console.log('View product:', product.id);
+    // FIX: Use product._id
+    console.log('View product:', product._id);
   };
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-visible hover:shadow-md transition-shadow duration-200 relative">
       <div className="relative">
-        <img
-          src={product.image}
+
+        <img 
+          src={product.images && product.images.length > 0 ? product.images[0] : 'https://via.placeholder.com/300'} 
+
           alt={product.name}
           className="w-full h-48 object-cover"
         />
@@ -81,11 +101,11 @@ const ProductManageCard = ({
 
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-lg font-bold text-gray-900">₹{product.price.toLocaleString()}</p>
-            <p className="text-xs text-gray-500">per unit</p>
+            <p className="text-lg font-bold text-gray-900">₹{lowestPrice.toLocaleString()}</p>
+            <p className="text-xs text-gray-500">starts from</p>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium text-gray-900">{product.stock} units</p>
+            <p className="text-sm font-medium text-gray-900">{product.stock || 0} units</p>
             <p className="text-xs text-gray-500">in stock</p>
           </div>
         </div>
@@ -145,16 +165,6 @@ const ProductManageCard = ({
           </div>
         </div>
       </div>
-
-      {product.stock < 10 && product.status === 'active' && (
-        <div className="px-4 pb-4">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2">
-            <p className="text-xs text-yellow-800 font-medium">
-              Low stock warning: Only {product.stock} units remaining
-            </p>
-          </div>
-        </div>
-      )}
 
       {showMenu && (
         <div

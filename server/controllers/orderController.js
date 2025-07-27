@@ -10,7 +10,7 @@ exports.placeOrder = async (req, res) => {
     if (!product) return res.status(404).json({ message: 'Product not found' });
 
     const order = new Order({
-      vendorId: req.user.userId,
+      vendorId: req.user.id, // FIX
       supplierId: product.supplierId,
       productId,
       quantity
@@ -25,7 +25,7 @@ exports.placeOrder = async (req, res) => {
 
 exports.getVendorOrders = async (req, res) => {
     try {
-    const orders = await Order.find({ vendorId: req.user.userId })
+    const orders = await Order.find({ vendorId: req.user.id }) // FIX
       .populate('productId', 'name')
       .populate('supplierId', 'name');
     res.json(orders);
@@ -36,7 +36,7 @@ exports.getVendorOrders = async (req, res) => {
 
 exports.getSupplierOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ supplierId: req.user.userId })
+    const orders = await Order.find({ supplierId: req.user.id }) // FIX
       .populate('productId', 'name')
       .populate('vendorId', 'name');
     res.json(orders);
@@ -51,7 +51,7 @@ exports.updateOrderStatus = async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (!order) return res.status(404).json({ message: 'Order not found' });
 
-    if (order.supplierId.toString() !== req.user.userId) {
+    if (order.supplierId.toString() !== req.user.id) { // FIX
       return res.status(403).json({ message: 'Not authorized' });
     }
 

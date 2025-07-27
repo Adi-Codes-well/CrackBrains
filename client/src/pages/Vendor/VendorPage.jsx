@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Search, 
-  Shield, 
-  TrendingUp, 
-  Package, 
+import {
+  Search,
+  Shield,
+  TrendingUp,
+  Package,
   IndianRupee,
   Clock,
   Star,
@@ -17,6 +17,7 @@ import {
   CreditCard,
   ArrowRight
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const VendorPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -125,10 +126,10 @@ const VendorPage = () => {
               <span className="ml-2 text-sm text-gray-600 hidden sm:block">Business Bridge</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"><a href="/">Home</a></a>
-              <a href="/vendors" className="text-emerald-600 font-medium"><a href="/vendor">For Vendors</a></a>
-              <a href="/suppliers" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"><a href="/supplier">For Suppliers</a></a>
-              <a href="#" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors"><a href="/about">About</a></a>
+              <Link to="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Home</Link>
+              <Link to="/vendor" className="text-emerald-600 font-medium">For Vendors</Link>
+              <Link to="/supplier" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</Link>
+              <Link to="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</Link>
             </div>
           </div>
         </div>
@@ -167,9 +168,9 @@ const VendorPage = () => {
                     Trust Score: 4.8
                   </div>
                 </div>
-                <img 
-                  src="https://images.pexels.com/photos/264537/pexels-photo-264537.jpeg?auto=compress&cs=tinysrgb&w=600" 
-                  alt="Quality Products" 
+                <img
+                  src="https://images.pexels.com/photos/264537/pexels-photo-264537.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="Quality Products"
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
                 <div className="space-y-2">
@@ -205,7 +206,7 @@ const VendorPage = () => {
               From sourcing challenges to business growth - we've got you covered with innovative solutions designed specifically for Indian vendors.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
@@ -217,7 +218,7 @@ const VendorPage = () => {
                 green: 'bg-green-100 text-green-600',
                 red: 'bg-red-100 text-red-600'
               };
-              
+
               return (
                 <div key={index} className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 group animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
                   <div className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${colorClasses[benefit.color]}`}>
@@ -243,7 +244,7 @@ const VendorPage = () => {
               Beyond sourcing - comprehensive tools to grow your business
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
@@ -274,7 +275,7 @@ const VendorPage = () => {
               Real experiences from business owners who transformed their operations with VyaparSetu
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300">
@@ -305,7 +306,7 @@ const VendorPage = () => {
               Why thousands of vendors choose us as their trusted business partner
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="bg-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -349,7 +350,7 @@ const VendorPage = () => {
                 Empowering Indian vendors with trusted suppliers, transparent pricing, and innovative business solutions.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">For Vendors</h4>
               <ul className="space-y-2 text-gray-300">
@@ -359,7 +360,7 @@ const VendorPage = () => {
                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Support</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-300">
@@ -370,7 +371,7 @@ const VendorPage = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
             <p className="text-gray-400 text-sm">© 2024 VyaparSetu. All rights reserved.</p>
           </div>
