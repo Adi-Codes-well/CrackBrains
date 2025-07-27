@@ -137,11 +137,10 @@ const VendorDashboard = () => {
                 <li key={index}>
                   <Link
                     to={item.href}
-                    className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-200 ${
-                      item.active
+                    className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-200 ${item.active
                         ? 'bg-emerald-600 text-white'
                         : 'text-slate-300 hover:bg-slate-700 hover:text-white'
-                    }`}
+                      }`}
                   >
                     <Icon className="w-5 h-5 mr-3" />
                     <span className="font-medium">{item.label}</span>
