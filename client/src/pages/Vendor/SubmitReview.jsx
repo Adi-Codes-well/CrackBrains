@@ -61,7 +61,7 @@ const SubmitReview = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('${import.meta.env.VITE_APP_API_BASE_URL}/reviews', formData, {
+      await axios.post('${import.meta.env.VITE_APP_API_BASE_URL}/api/reviews', formData, {
         headers: {
           // This header is important for file uploads
           'Content-Type': 'multipart/form-data',

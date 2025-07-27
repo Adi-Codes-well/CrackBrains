@@ -18,7 +18,7 @@ const LoginForm = () => {
     try {
       // FIX: Use a relative URL path starting with /api.
       // Vite will correctly proxy this request to http://localhost:5000/api/auth/login
-      const res = await axios.post('${import.meta.env.VITE_APP_API_BASE_URL}/auth/login', { email, password });
+      const res = await axios.post('${import.meta.env.VITE_APP_API_BASE_URL}/api/auth/login', { email, password });
       
       localStorage.setItem('token', res.data.token);
 
