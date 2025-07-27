@@ -33,7 +33,7 @@ const VendorDashboard = () => {
         }
 
         // 1. Fetch vendor's own profile data
-        const userRes = await axios.get('/api/auth/me', {
+        const userRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/auth/me', {
           headers: { Authorization: token },
         });
         setVendorData(userRes.data);

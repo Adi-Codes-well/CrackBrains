@@ -241,7 +241,7 @@ const SignupForm = () => {
     // }
     
     try {
-      await axios.post('/api/auth/register', formDataToSend);
+      await axios.post('${import.meta.env.VITE_APP_API_BASE_URL}/auth/register', formDataToSend);
       alert('Registration successful! Please log in.');
       navigate('/login');
     } catch (err) {
