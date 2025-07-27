@@ -32,7 +32,7 @@ const App = () => {
       <Route element={<ProtectedRoute />}>
         {/* Vendor Routes */}
         <Route path="/vendor/dashboard" element={<VendorDashboard />} />
-        <Route path="/vendor/browse" element={<BrowseProducts />} />
+        <Route path="/browse" element={<BrowseProducts />} />
         <Route path="/vendor/details/:id" element={<ProductDetails />} />
         <Route path="/vendor/orders" element={<MyOrders />} />
         <Route path="/vendor/review" element={<SubmitReview />} />
