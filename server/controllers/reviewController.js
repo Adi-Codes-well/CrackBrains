@@ -5,7 +5,7 @@ exports.submitReview = async (req, res) => {
   const image = req.file ? req.file.path : null;
 
   const review = new Review({
-    vendorId: req.user.userId,
+    vendorId: req.user.id, // FIX: Changed from req.user.userId to req.user.id
     productId,
     supplierId,
     rating,
