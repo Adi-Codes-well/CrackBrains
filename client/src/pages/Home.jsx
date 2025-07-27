@@ -35,42 +35,42 @@ const VyaparSetuLanding = () => {
     const featuredProducts = [
         {
             id: 1,
-            name: 'Premium Basmati Rice 25kg',
+            name: 'Premium Flour',
             supplier: 'GoodGrain Wholesalers',
             price: 2500,
             bulkPrice: 2200,
             trustScore: 4.8,
-            image: 'https://images.pexels.com/photos/33239/rice-grain-seed-food.jpg?auto=compress&cs=tinysrgb&w=400',
+            image: 'https://tse4.mm.bing.net/th/id/OIP.C-36eEFGof7CnWhw-gkmUQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
             verified: true
         },
         {
             id: 2,
-            name: 'Organic Turmeric Powder 1kg',
+            name: 'All Kind of Spices',
             supplier: 'SpiceKing Distributors',
             price: 450,
             bulkPrice: 380,
             trustScore: 4.6,
-            image: 'https://images.pexels.com/photos/4198015/pexels-photo-4198015.jpeg?auto=compress&cs=tinysrgb&w=400',
+            image: 'https://st.depositphotos.com/1105977/1846/i/950/depositphotos_18460429-stock-photo-spices-collection.jpg',
             verified: true
         },
         {
             id: 3,
-            name: 'Cotton T-Shirts Pack of 12',
+            name: 'All Kind of Textiles',
             supplier: 'TextileMart India',
             price: 1800,
             bulkPrice: 1500,
             trustScore: 4.2,
-            image: 'https://images.pexels.com/photos/1020585/pexels-photo-1020585.jpeg?auto=compress&cs=tinysrgb&w=400',
+            image: 'https://static.fibre2fashion.com/Newsresource/images/284/shutterstock-617507069_295716.jpg',
             verified: true
         },
         {
             id: 4,
-            name: 'LED Bulbs 9W Pack of 10',
-            supplier: 'BrightLight Solutions',
+            name: 'Beverages & Drinks',
+            supplier: 'DrinkIt Traders',
             price: 800,
             bulkPrice: 650,
             trustScore: 4.4,
-            image: 'https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=400',
+            image: 'https://c.pxhere.com/images/0d/80/a9b6d42bb3b677edff03ecd53454-1444595.jpg!d',
             verified: true
         }
     ];
@@ -119,13 +119,10 @@ const VyaparSetuLanding = () => {
 
                         {/* Right Side Icons */}
                         <div className="flex items-center space-x-4">
-                            <button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">
-                                <Search className="w-5 h-5" />
-                            </button>
                             <Link to="/user-profile"><button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">
                                 <User className="w-5 h-5" />
                             </button></Link>
-    
+
                         </div>
                     </div>
                 </div>
@@ -159,7 +156,7 @@ const VyaparSetuLanding = () => {
                                         <Shield className="w-6 h-6 text-emerald-600 mr-2" />
                                         <span className="font-semibold text-gray-900"></span>
                                     </div>
-                                  
+
                                 </div>
                                 <img
                                     src="https://images.pexels.com/photos/5864769/pexels-photo-5864769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
@@ -249,24 +246,22 @@ const VyaparSetuLanding = () => {
                                     <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
                                     <p className="text-sm text-gray-600 mb-3">{product.supplier}</p>
                                     <div className="space-y-2">
-                                        <div className="flex items-center justify-between">
+                                        {/* <div className="flex items-center justify-between">
                                             <span className="text-sm text-gray-600">Regular:</span>
                                             <div className="flex items-center font-semibold text-gray-900">
                                                 <IndianRupee className="w-4 h-4" />
-                                                <span>{product.price.toLocaleString()}</span>
+                                                <span></span>
                                             </div>
-                                        </div>
-                                        <div className="flex items-center justify-between">
+                                        </div> */}
+                                        {/* <div className="flex items-center justify-between">
                                             <span className="text-sm text-emerald-600">Bulk:</span>
                                             <div className="flex items-center font-semibold text-emerald-600">
                                                 <IndianRupee className="w-4 h-4" />
                                                 <span>{product.bulkPrice.toLocaleString()}</span>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
-                                    <Link to="/vendor/details/:id"><button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 mt-4">
-                                        View Details
-                                    </button></Link>
+
                                 </div>
                             </div>
                         ))}
@@ -284,6 +279,7 @@ const VyaparSetuLanding = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {categories.map((category, index) => (
+
                             <div key={index} className="relative group cursor-pointer overflow-hidden rounded-2xl">
                                 <div className="aspect-w-16 aspect-h-12">
                                     <img
@@ -299,7 +295,6 @@ const VyaparSetuLanding = () => {
                                     </div>
                                 </div>
                                 <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <ArrowRight className="w-5 h-5" />
                                 </div>
                             </div>
                         ))}
@@ -356,20 +351,16 @@ const VyaparSetuLanding = () => {
                         <div>
                             <h4 className="font-semibold mb-4">Company</h4>
                             <ul className="space-y-2 text-gray-300">
-                                <li><Link to="/about" className="hover:text-emerald-400 transition-colors">About Us</Link></li>
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Contact</a></li>
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Careers</a></li>
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Press</a></li>
+                                <li><Link to="/about"
+                                    onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
                             </ul>
                         </div>
 
                         <div>
                             <h4 className="font-semibold mb-4">Support</h4>
                             <ul className="space-y-2 text-gray-300">
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Help Center</a></li>
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Shipping & Returns</a></li>
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">FAQ</a></li>
-                                <li><a href="#" className="hover:text-emerald-400 transition-colors">Trust & Safety</a></li>
+                                <li><Link to="/trust-safety"
+                                    onClick={() => window.scrollTo(0, 0)}>Trust & Safety</Link></li>
                             </ul>
                         </div>
                     </div>
