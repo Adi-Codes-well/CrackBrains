@@ -59,41 +59,75 @@ exports.getAllProducts = async (req, res) => {
     let products = await Product.find(filter)
       .populate({
         path: 'supplierId',
-        select: 'name isVerifiedSupplier'
-      });
+        select: 'name isVerifiedSupplier' // Select necessary fields from User model
+      })
+      .lean(); // Use .lean() to get plain JavaScript objects for easier modification
 
-    // DEFINITIVE FIX: Filter out any products where the supplierId was invalid and could not be populated.
-    // This prevents crashes from bad data in the database.
+    // Filter out any products where the supplierId was invalid or not found
     products = products.filter(p => p.supplierId);
 
-    let filteredProducts = products.map(p => p.toObject()); // Convert to plain objects for modification
-    
-    // Price Filtering
+    // --- NEW LOGIC: Always calculate and add trustScore to each product ---
+    // Iterate through products and calculate trust score for each supplier
+    // This ensures that the 'trustScore' field is always present on the product object
+    // before any filtering based on trust score or sending to the frontend.
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if (product.supplierId) { // Ensure supplierId exists
+            const score = await calculateTrustScore(product.supplierId._id, product.supplierId.isVerifiedSupplier);
+            product.trustScore = score; // Add the calculated trust score to the product object
+        } else {
+            product.trustScore = 0; // Assign a default if supplierId is somehow missing
+        }
+    }
+    // --- END NEW LOGIC ---
+
+    let filteredProducts = products; // Start with products that now have trust scores
+
+    // Price Filtering (backend side) - Apply after trust score calculation
     if (minPrice || maxPrice) {
       filteredProducts = filteredProducts.filter(prod => {
         if (!prod.priceTiers || prod.priceTiers.length === 0) return false;
         const minTierPrice = Math.min(...prod.priceTiers.map(t => t.pricePerUnit));
-        return (!minPrice || minTierPrice >= minPrice) && (!maxPrice || minTierPrice <= maxPrice);
+        return (!minPrice || minTierPrice >= Number(minPrice)) && (!maxPrice || minTierPrice <= Number(maxPrice));
       });
     }
 
-    // Trust Score Filtering
+    // Trust Score Filtering (backend side) - Apply after trust score calculation
     if (trustScoreMin) {
-      const trustFiltered = [];
-      for (let product of filteredProducts) {
-        const score = await calculateTrustScore(product.supplierId._id, product.supplierId.isVerifiedSupplier);
-        if (score >= Number(trustScoreMin)) {
-          product.trustScore = score;
-          trustFiltered.push(product);
-        }
-      }
-      return res.json(trustFiltered);
+      filteredProducts = filteredProducts.filter(prod => prod.trustScore >= Number(trustScoreMin));
     }
     
     res.json(filteredProducts);
   } catch (err) {
     console.error('!!! ERROR FETCHING PRODUCTS !!!', err);
     res.status(500).json({ message: 'Error fetching products', error: err.message });
+  }
+};
+
+/**
+ * @desc    Get a single product by its ID
+ * @route   GET /api/products/:id
+ * @access  Public
+ */
+exports.getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id).populate('supplierId', 'name isVerifiedSupplier').lean();
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Also calculate trust score for single product view
+    if (product.supplierId) {
+        const score = await calculateTrustScore(product.supplierId._id, product.supplierId.isVerifiedSupplier);
+        product.trustScore = score;
+    } else {
+        product.trustScore = 0;
+    }
+
+    res.json(product);
+  } catch (err) {
+    console.error('Error getting product by ID:', err);
+    res.status(500).json({ message: 'Server error while fetching product details.' });
   }
 };
 
