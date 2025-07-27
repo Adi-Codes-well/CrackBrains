@@ -33,13 +33,13 @@ const VendorDashboard = () => {
         }
 
         // 1. Fetch vendor's own profile data
-        const userRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/auth/me', {
+        const userRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/api/auth/me', {
           headers: { Authorization: token },
         });
         setVendorData(userRes.data);
 
         // 2. Fetch vendor's orders
-        const ordersRes = await axios.get('/api/orders/vendor', {
+        const ordersRes = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/api/orders/vendor', {
           headers: { Authorization: token },
         });
         setOrders(ordersRes.data);
