@@ -194,7 +194,7 @@ const SupplierPage = () => {
                   </div>
                 </div>
                 <img 
-                  src="https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                  src="https://stratefix.com/wp-content/uploads/2021/06/Ways-To-Grow-Your-Business-In-2020.jpg" 
                   alt="Supplier Dashboard" 
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />

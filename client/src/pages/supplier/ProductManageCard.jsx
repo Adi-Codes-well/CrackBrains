@@ -59,10 +59,10 @@ const ProductManageCard = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-visible hover:shadow-md transition-shadow duration-200 relative">
       <div className="relative">
-        <img 
-          src={product.image} 
+        <img
+          src={product.image}
           alt={product.name}
           className="w-full h-48 object-cover"
         />
@@ -98,7 +98,7 @@ const ProductManageCard = ({
             <Eye className="w-4 h-4 mr-2" />
             View
           </button>
-          
+
           <button
             onClick={handleEdit}
             className="flex-1 flex items-center justify-center px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded-lg transition-colors duration-200"
@@ -106,7 +106,7 @@ const ProductManageCard = ({
             <Edit className="w-4 h-4 mr-2" />
             Edit
           </button>
-          
+
           <div className="relative">
             <button
               onClick={() => setShowMenu(!showMenu)}
@@ -114,20 +114,19 @@ const ProductManageCard = ({
             >
               <MoreVertical className="w-4 h-4" />
             </button>
-            
+
             {showMenu && (
-              <div className="absolute right-0 top-full mt-1 w-32 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10">
+              <div className="absolute right-0 top-full mt-1 w-32 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
                 <button
                   onClick={() => {
                     handleDelete();
                     setShowMenu(false);
                   }}
                   disabled={isDeleting}
-                  className={`w-full flex items-center px-3 py-2 text-sm text-left transition-colors duration-200 ${
-                    isDeleting
+                  className={`w-full flex items-center px-3 py-2 text-sm text-left transition-colors duration-200 ${isDeleting
                       ? 'text-gray-400 cursor-not-allowed'
                       : 'text-red-600 hover:bg-red-50'
-                  }`}
+                    }`}
                 >
                   {isDeleting ? (
                     <>
@@ -158,8 +157,8 @@ const ProductManageCard = ({
       )}
 
       {showMenu && (
-        <div 
-          className="fixed inset-0 z-5" 
+        <div
+          className="fixed inset-0 z-5"
           onClick={() => setShowMenu(false)}
         />
       )}
