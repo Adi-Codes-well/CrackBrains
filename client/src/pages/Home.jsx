@@ -108,10 +108,12 @@ const VyaparSetuLanding = () => {
 
                         {/* Center Navigation */}
                         <div className="hidden md:flex items-center space-x-8">
+
                             <Link to="/vendor" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</Link>
                             <Link to="/supplier" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</Link>
                             <Link to="/trust-engine" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Trust Engine</Link>
                             <Link to="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</Link>
+
                         </div>
 
 
@@ -158,27 +160,16 @@ const VyaparSetuLanding = () => {
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center">
                                         <Shield className="w-6 h-6 text-emerald-600 mr-2" />
-                                        <span className="font-semibold text-gray-900">Trust Score: 4.8/5</span>
+                                        <span className="font-semibold text-gray-900"></span>
                                     </div>
-                                    <div className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium">
-                                        Verified
-                                    </div>
+                                  
                                 </div>
                                 <img
-                                    src="https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    src="https://images.pexels.com/photos/5864769/pexels-photo-5864769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                                     alt="B2B Trading"
                                     className="w-full h-64 object-cover rounded-lg mb-4"
                                 />
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="font-semibold text-gray-900">Premium Rice Supplier</p>
-                                        <p className="text-sm text-gray-600">Mumbai, Maharashtra</p>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <Star className="w-4 h-4 text-yellow-500 fill-current mr-1" />
-                                        <span className="text-sm font-medium">4.8</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

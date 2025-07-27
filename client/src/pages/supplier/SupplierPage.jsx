@@ -197,6 +197,7 @@ const SupplierPage = () => {
                 <img
                   src="https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg?auto=compress&cs=tinysrgb&w=600"
                   alt="Supplier Dashboard"
+
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
                 <div className="space-y-3">
