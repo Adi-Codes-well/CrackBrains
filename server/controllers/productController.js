@@ -138,3 +138,19 @@ exports.deleteProduct = async (req, res) => {
     res.status(500).json({ message: 'Server error while deleting product.' });
   }
 };
+
+exports.getSupplierProducts = async (req, res) => {
+  try {
+    // This ensures only suppliers can access this route
+    if (req.user.role !== 'supplier') {
+      return res.status(403).json({ message: 'Access denied.' });
+    }
+
+    // Find all products that match the logged-in supplier's ID
+    const products = await Product.find({ supplierId: req.user.id });
+    res.json(products);
+  } catch (err) {
+    console.error('!!! ERROR FETCHING SUPPLIER PRODUCTS !!!', err);
+    res.status(500).json({ message: 'Error fetching products', error: err.message });
+  }
+};

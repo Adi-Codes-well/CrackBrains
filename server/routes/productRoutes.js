@@ -7,9 +7,11 @@ const {
   createProduct,
   getAllProducts,
   getProductById,
-  deleteProduct
+  deleteProduct,
+  getSupplierProducts // Import the new function
 } = require('../controllers/productController');
 
+router.get('/myproducts', auth, getSupplierProducts);
 // Create Product (Supplier only)
 router.post('/', auth, upload.array('images', 5), createProduct);
 
