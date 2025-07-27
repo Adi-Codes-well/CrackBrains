@@ -15,7 +15,7 @@ const MyProducts = () => {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/products/myproducts', {
+        const response = await axios.get('${import.meta.env.VITE_APP_API_BASE_URL}/api/products/myproducts', {
           headers: { Authorization: token },
         });
         setProducts(response.data);
