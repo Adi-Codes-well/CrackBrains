@@ -26,6 +26,7 @@ import SupplierPage from './pages/supplier/SupplierPage';
 import AboutPage from './pages/AboutPage';
 import TrustEnginePage from './pages/TrustEnginePage';
 import OrderManageCard from './pages/supplier/OrderManageCard';
+import MyReviews from './pages/Vendor/MyReviews';
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/vendor/details/:id" element={<ProductDetails />} />
         <Route path="/vendor/orders" element={<MyOrders />} />
         <Route path="/vendor/review" element={<SubmitReview />} />
+        <Route path="/vendor/reviews" element={<MyReviews />} />
 
         {/* Supplier Routes */}
         <Route path="/supplier/dashboard" element={<SupplierDashboard />} />
