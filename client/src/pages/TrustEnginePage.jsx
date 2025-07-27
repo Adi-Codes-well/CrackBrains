@@ -261,7 +261,6 @@ const TrustEnginePage = () => {
           </div>
         </div>
       </section>
-
       {/* Trust Score Calculation */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -273,7 +272,6 @@ const TrustEnginePage = () => {
               Our AI algorithm considers multiple factors to generate dynamic trust scores that reflect real supplier reliability.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {trustFactors.map((factor, index) => {
               const IconComponent = factor.icon;
@@ -291,7 +289,6 @@ const TrustEnginePage = () => {
           </div>
         </div>
       </section>
-
       {/* Trust Levels */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -303,7 +300,6 @@ const TrustEnginePage = () => {
               Understanding what each trust score level means for your business decisions.
             </p>
           </div>
-
           <div className="space-y-6">
             {trustLevels.map((level, index) => {
               const IconComponent = level.icon;
@@ -331,7 +327,6 @@ const TrustEnginePage = () => {
           </div>
         </div>
       </section>
-
       {/* How It Works */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
