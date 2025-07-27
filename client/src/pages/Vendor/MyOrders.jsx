@@ -31,7 +31,7 @@ const MyOrders = () => {
           setLoading(false);
           return;
         }
-        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/products/orders/vendor`, {
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/orders/vendor`, {
           headers: { 'Authorization': token }
         });
         setOrders(response.data);

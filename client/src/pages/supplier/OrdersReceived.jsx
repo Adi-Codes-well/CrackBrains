@@ -34,7 +34,7 @@ const OrdersReceived = () => {
   const handleStatusUpdate = async (orderId, status) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`/api/orders/${orderId}`, { status }, {
+      await axios.patch(`${import.meta.env.VITE_APP_API_URL}/api/orders/${orderId}`, { status }, {
         headers: { Authorization: token },
       });
       // Re-fetch orders to show the update
