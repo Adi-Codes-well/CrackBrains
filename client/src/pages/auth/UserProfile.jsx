@@ -62,14 +62,19 @@ const UserProfile = () => {
     }
     setIsEditing(!isEditing);
   };
-
-  const handleSave = () => {
-    // Here you would typically send a PUT/PATCH request to update user data
-    // For now, we'll just update the local state to simulate it.
-    setUserData(editData);
-    setIsEditing(false);
-    console.log('Profile updated:', editData);
-    // Example API call: await axios.put('/api/users/profile', editData, { headers });
+  const handleSave = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put('/api/auth/me', editData, {
+        headers: { Authorization: token },
+      });
+      setUserData(response.data);
+      setIsEditing(false);
+      alert('Profile updated successfully!');
+    } catch (err) {
+      setError('Failed to update profile.');
+      console.error(err);
+    }
   };
 
   const handlePasswordChange = (e) => {

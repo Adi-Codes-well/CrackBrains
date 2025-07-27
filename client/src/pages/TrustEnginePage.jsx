@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Shield, 
-  TrendingUp, 
-  Eye, 
-  CheckCircle, 
+import {
+  Shield,
+  TrendingUp,
+  Eye,
+  CheckCircle,
   Star,
   Award,
   Users,
@@ -18,6 +18,7 @@ import {
   AlertTriangle,
   ThumbsUp
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const TrustEnginePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -171,11 +172,11 @@ const TrustEnginePage = () => {
               <span className="ml-2 text-sm text-gray-600 hidden sm:block">Business Bridge</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Home</a>
-              <a href="/vendors" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</a>
-              <a href="/suppliers" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</a>
-              <a href="/trust-engine" className="text-emerald-600 font-medium">Trust Engine</a>
-              <a href="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</a>
+              <Link to="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Home</Link>
+              <Link to="/vendor" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</Link>
+              <Link to="/supplier" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</Link>
+              <Link to="/trust-engine" className="text-emerald-600 font-medium">Trust Engine</Link>
+              <Link to="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</Link>
             </div>
           </div>
         </div>
@@ -229,7 +230,7 @@ const TrustEnginePage = () => {
               Our Trust Engine is built on three fundamental components that work together to ensure every transaction is transparent and reliable.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {trustComponents.map((component, index) => {
               const IconComponent = component.icon;
@@ -238,7 +239,7 @@ const TrustEnginePage = () => {
                 blue: 'bg-blue-100 text-blue-600 border-blue-200',
                 purple: 'bg-purple-100 text-purple-600 border-purple-200'
               };
-              
+
               return (
                 <div key={index} className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 animate-fade-in-up" style={{animationDelay: `${index * 0.2}s`}}>
                   <div className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 ${colorClasses[component.color]}`}>
@@ -272,7 +273,7 @@ const TrustEnginePage = () => {
               Our AI algorithm considers multiple factors to generate dynamic trust scores that reflect real supplier reliability.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {trustFactors.map((factor, index) => {
               const IconComponent = factor.icon;
@@ -302,7 +303,7 @@ const TrustEnginePage = () => {
               Understanding what each trust score level means for your business decisions.
             </p>
           </div>
-          
+
           <div className="space-y-6">
             {trustLevels.map((level, index) => {
               const IconComponent = level.icon;
@@ -342,11 +343,11 @@ const TrustEnginePage = () => {
               A step-by-step look at how we build and maintain trust scores across our platform.
             </p>
           </div>
-          
+
           <div className="relative">
             {/* Connection Line */}
             <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-emerald-200 transform -translate-y-1/2"></div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
               {howItWorks.map((step, index) => {
                 const IconComponent = step.icon;
@@ -379,7 +380,7 @@ const TrustEnginePage = () => {
               The Trust Engine transforms B2B commerce by eliminating uncertainty and building confidence in every transaction.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center text-white">
               <div className="bg-emerald-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -423,7 +424,7 @@ const TrustEnginePage = () => {
                 Revolutionizing B2B commerce in India through our innovative Trust Engine and comprehensive marketplace platform.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">Trust Engine</h4>
               <ul className="space-y-2 text-gray-300">
@@ -433,7 +434,7 @@ const TrustEnginePage = () => {
                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Photo Reviews</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-300">
@@ -444,7 +445,7 @@ const TrustEnginePage = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
             <p className="text-gray-400 text-sm">© 2024 VyaparSetu. All rights reserved.</p>
           </div>

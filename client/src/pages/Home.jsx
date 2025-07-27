@@ -18,6 +18,8 @@ import {
     Facebook,
     Twitter
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 
 const VyaparSetuLanding = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -106,20 +108,23 @@ const VyaparSetuLanding = () => {
 
                         {/* Center Navigation */}
                         <div className="hidden md:flex items-center space-x-8">
-                            <a href="/vendor" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</a>
-                            <a href="/supplier" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</a>
-                            <a href="/trust-engine" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Trust Engine</a>
-                            <a href="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</a>
+
+                            <Link to="/vendor" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Vendors</Link>
+                            <Link to="/supplier" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">For Suppliers</Link>
+                            <Link to="/trust-engine" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">Trust Engine</Link>
+                            <Link to="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">About</Link>
+
                         </div>
+
 
                         {/* Right Side Icons */}
                         <div className="flex items-center space-x-4">
                             <button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">
                                 <Search className="w-5 h-5" />
                             </button>
-                            <a href="/user-profile"><button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">
+                            <Link to="/user-profile"><button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors">
                                 <User className="w-5 h-5" />
-                            </button></a>
+                            </button></Link>
                             {/* <button className="p-2 text-gray-600 hover:text-emerald-600 transition-colors relative">
                                 <ShoppingCart className="w-5 h-5" />
                                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
@@ -141,13 +146,13 @@ const VyaparSetuLanding = () => {
                                 Connect with verified suppliers, discover transparent pricing, and build your business with India's most trusted B2B marketplace.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <a href="/login"><button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                                <Link to="/login"><button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
                                     Get Started
                                     <ArrowRight className="w-5 h-5 ml-2" />
-                                </button></a>
-                                <a href="/browse"><button className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 px-8 py-4 rounded-lg font-semibold transition-colors">
+                                </button></Link>
+                                <Link to="/browse"><button className="border border-emerald-600 text-emerald-600 hover:bg-emerald-50 px-8 py-4 rounded-lg font-semibold transition-colors">
                                     Browse Products
-                                </button></a>
+                                </button></Link>
                             </div>
                         </div>
                         <div className="relative">
@@ -262,9 +267,9 @@ const VyaparSetuLanding = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="/vendor/details/:id"><button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 mt-4">
+                                    <Link to="/vendor/details/:id"><button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 mt-4">
                                         View Details
-                                    </button></a>
+                                    </button></Link>
                                 </div>
                             </div>
                         ))}
@@ -354,7 +359,7 @@ const VyaparSetuLanding = () => {
                         <div>
                             <h4 className="font-semibold mb-4">Company</h4>
                             <ul className="space-y-2 text-gray-300">
-                                <li><a href="/about" className="hover:text-emerald-400 transition-colors">About Us</a></li>
+                                <li><Link to="/about" className="hover:text-emerald-400 transition-colors">About Us</Link></li>
                                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Contact</a></li>
                                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Careers</a></li>
                                 <li><a href="#" className="hover:text-emerald-400 transition-colors">Press</a></li>
