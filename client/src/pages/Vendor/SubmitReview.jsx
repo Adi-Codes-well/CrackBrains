@@ -7,6 +7,8 @@ import {
   X,
   Image as ImageIcon
 } from 'lucide-react';
+import axios from 'axios'; // Step 1: Import axios
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SubmitReview = () => {
   const [rating, setRating] = useState(0);
@@ -16,17 +18,15 @@ const SubmitReview = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const orderData = {
-    orderId: 'VY-2024-0089',
-    productName: 'Premium Basmati Rice 25kg',
-    supplierName: 'GoodGrain Wholesalers'
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const orderData = location.state?.order;
 
   const handlePhotoUpload = (event) => {
     const files = event.target.files;
     if (files) {
-      const newPhotos = Array.from(files).slice(0, 5 - photos.length);
-      setPhotos(prev => [...prev, ...newPhotos]);
+      setPhotos(Array.from(files).slice(0, 1));
     }
   };
 
@@ -36,12 +36,45 @@ const SubmitReview = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (rating === 0) return;
+    if (rating === 0) {
+        alert("Please select a star rating.");
+        return;
+    }
+    if (!orderData) {
+        alert("Could not find order data. Please go back to your orders and try again.");
+        return;
+    }
 
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+
+    // Use FormData because we are sending a file (image) along with text data
+    const formData = new FormData();
+    formData.append('productId', orderData.productId._id);
+    formData.append('supplierId', orderData.supplierId._id);
+    formData.append('rating', rating);
+    formData.append('comment', comment);
+    
+    // Append the image file if it exists
+    if (photos.length > 0) {
+      formData.append('image', photos[0]);
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('/api/reviews', formData, {
+        headers: {
+          // This header is important for file uploads
+          'Content-Type': 'multipart/form-data',
+          'Authorization': token,
+        },
+      });
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error('Review submission failed:', err);
+      alert('Failed to submit review. ' + (err.response?.data?.message || 'Please try again.'));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const StarRating = () => (
