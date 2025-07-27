@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Search, Filter, Star, IndianRupee, Package, Shield, TrendingUp, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../../common/Navbar';
+// import Navbar from '../../common/Navbar';
 
 const BrowseProducts = () => {
     const [products, setProducts] = useState([]);
@@ -121,8 +121,7 @@ const BrowseProducts = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <Navbar />
-            <div className="flex flex-1 pt-16">
+            <div className="flex flex-1 pt-1">
                 <aside className="w-80 bg-white shadow-sm border-r border-gray-200 p-6 overflow-y-auto hidden lg:block">
                      <div className="flex items-center mb-6">
                         <Filter className="w-5 h-5 text-gray-600 mr-2" />
