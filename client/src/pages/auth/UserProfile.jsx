@@ -45,7 +45,7 @@ const UserProfile = () => {
           headers: { Authorization: token },
         });
         setUserData(response.data);
-        setEditData(response.data); // Initialize editData with fetched data
+        setEditData(response.data); 
       } catch (err) {
         setError('Failed to fetch user profile. Please try again later.');
         console.error(err);
@@ -58,7 +58,7 @@ const UserProfile = () => {
 
   const handleEditToggle = () => {
     if (isEditing) {
-      setEditData(userData); // Reset changes if canceled
+      setEditData(userData); 
     }
     setIsEditing(!isEditing);
   };
@@ -83,7 +83,6 @@ const UserProfile = () => {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    // Logic to submit password change to the backend would go here
     console.log('Password change requested');
     setIsChangingPassword(false);
     setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
@@ -102,7 +101,6 @@ const UserProfile = () => {
         icon: CheckCircle,
         text: 'Verified Supplier'
       },
-      // You can add a 'rejected' status if your backend supports it
     };
 
     const badge = badges[status];
@@ -209,7 +207,7 @@ const UserProfile = () => {
                 </div>
                 <input
                   type="tel"
-                  placeholder="+91 98765 43210" // Placeholder as it's not in the model
+                  placeholder="+91 98765 43210" 
                   disabled={!isEditing}
                   className={`block w-full pl-10 pr-3 py-3 border rounded-lg transition-colors duration-200 ${
                     isEditing 
