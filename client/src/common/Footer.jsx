@@ -4,7 +4,7 @@ import React from 'react';
 const Footer = () => {
   const footerLinks = [
     { label: 'About Us', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Contact', href: '/about' },
     { label: 'Terms of Service', href: '/terms' },
     { label: 'Privacy Policy', href: '/privacy' }
   ];
