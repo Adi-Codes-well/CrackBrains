@@ -4,23 +4,27 @@ const Product = require('../models/Product');
 
 
 exports.placeOrder = async (req, res) => {
-    try {
-    const { productId, quantity } = req.body;
-    const product = await Product.findById(productId);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
+   try {
+        // Destructure new fields from the request body
+        const { productId, quantity, totalAmount, shippingAddress, paymentDetails } = req.body;
+        const product = await Product.findById(productId);
+        if (!product) return res.status(404).json({ message: 'Product not found' });
 
-    const order = new Order({
-      vendorId: req.user.id, // FIX
-      supplierId: product.supplierId,
-      productId,
-      quantity
-    });
+        const order = new Order({
+            vendorId: req.user.id,
+            supplierId: product.supplierId,
+            productId,
+            quantity,
+            totalAmount, // Save the total amount
+            shippingAddress, // Save the shipping address
+            paymentDetails // Save payment details
+        });
 
-    await order.save();
-    res.status(201).json({ message: 'Order placed', order });
-  } catch (err) {
-    res.status(500).json({ message: 'Error placing order', error: err.message });
-  }
+        await order.save();
+        res.status(201).json({ message: 'Order placed successfully', order });
+    } catch (err) {
+        res.status(500).json({ message: 'Error placing order', error: err.message });
+    }
 }
 
 exports.getVendorOrders = async (req, res) => {

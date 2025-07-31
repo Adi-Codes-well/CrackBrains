@@ -234,11 +234,6 @@ const SignupForm = () => {
     formDataToSend.append('password', formData.password);
     formDataToSend.append('role', formData.role);
 
-    // --- Document upload logic commented out for testing ---
-    // if (formData.role === 'supplier') {
-    //   if (gstinFile) formDataToSend.append('gstin', gstinFile);
-    //   if (fssaiFile) formDataToSend.append('fssai', fssaiFile);
-    // }
     
     try {
       await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/auth/register`, formDataToSend);
@@ -301,25 +296,6 @@ const SignupForm = () => {
                         </div>
                     </div>
 
-                    {/* --- Document upload fields commented out for testing --- */}
-                    {/* {formData.role === 'supplier' && (
-                        <>
-                            <div>
-                                <label htmlFor="gstin" className="block text-sm font-medium text-gray-700">GSTIN Document</label>
-                                <div className="mt-1 relative">
-                                    <Upload className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                                    <input id="gstin" name="gstin" type="file" onChange={(e) => setGstinFile(e.target.files[0])} className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"/>
-                                </div>
-                            </div>
-                            <div>
-                                <label htmlFor="fssai" className="block text-sm font-medium text-gray-700">FSSAI License (Optional)</label>
-                                <div className="mt-1 relative">
-                                    <Upload className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                                    <input id="fssai" name="fssai" type="file" onChange={(e) => setFssaiFile(e.target.files[0])} className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"/>
-                                </div>
-                            </div>
-                        </>
-                    )} */}
 
                     <button type="submit" disabled={loading} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-300">
                         {loading ? 'Creating Account...' : 'Create Account'}
